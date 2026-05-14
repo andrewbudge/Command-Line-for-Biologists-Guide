@@ -20,18 +20,19 @@ jobs:
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         with:
-          # The book lives in book/, so tell latex-action to chdir there first.
           working_directory: book
           root_file: main.tex
           args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+
+      - name: Rename PDF for release
+        run: mv book/main.pdf book/Command-Line-for-Biologists.pdf
 
       - name: Update "latest" release with new PDF
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           name: Latest build
-          # PDF is in the book/ subfolder
-          files: book/main.pdf
+          files: book/Command-Line-for-Biologists.pdf
           body: |
             Auto-built from commit ${{ github.sha }}.
 
