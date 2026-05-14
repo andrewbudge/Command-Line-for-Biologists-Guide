@@ -1,0 +1,39 @@
+name: Build Book PDF
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          # The book lives in book/, so tell latex-action to chdir there first.
+          working_directory: book
+          root_file: main.tex
+          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+
+      - name: Update "latest" release with new PDF
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest build
+          # PDF is in the book/ subfolder
+          files: book/main.pdf
+          body: |
+            Auto-built from commit ${{ github.sha }}.
+
+            This is a work-in-progress — content changes frequently.
+            Download the PDF below to see the current state of the book.
