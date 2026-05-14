@@ -1,0 +1,87 @@
+% =====================================================================
+% Preamble: packages, styles, and custom commands
+% Everything that configures the document lives here so main.tex stays clean.
+% =====================================================================
+
+% --- Encoding & fonts ------------------------------------------------
+\usepackage[utf8]{inputenc}     % allow UTF-8 in source files
+\usepackage[T1]{fontenc}        % proper output font encoding
+\usepackage{lmodern}            % nicer-looking Latin Modern fonts
+\usepackage{microtype}          % subtle typography improvements
+
+% --- Page layout ------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+
+% --- Math (used for things like phi X174) ----------------------------
+\usepackage{amsmath, amssymb}
+
+% --- Graphics and color ----------------------------------------------
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+% --- Hyperlinks (load near the end of packages, but before tcolorbox) -
+\usepackage[colorlinks=true,
+            linkcolor=blue!50!black,
+            urlcolor=blue!50!black,
+            citecolor=blue!50!black,
+            pdftitle={Command Line for Biologists: A Practical Guide to the Terminal, Tools, and Reproducible Workflows},
+            pdfauthor={Andrew Budge}]{hyperref}
+
+% --- Code listings ---------------------------------------------------
+\usepackage{listings}
+
+% --- Colored callout boxes -------------------------------------------
+\usepackage[most]{tcolorbox}
+
+% --- Custom colors for code blocks -----------------------------------
+\definecolor{bashbg}{HTML}{F7F7F2}
+\definecolor{bashprompt}{HTML}{0066CC}
+\definecolor{bashcomment}{HTML}{6A737D}
+\definecolor{bashkeyword}{HTML}{B31D28}
+\definecolor{bashrule}{HTML}{D0D7DE}
+
+% --- Bash listing style ----------------------------------------------
+% This styles every lstlisting block. The `literate` line recolors the
+% `$` prompt to blue so terminal prompts stand out from the output.
+\lstdefinestyle{bash}{
+    backgroundcolor=\color{bashbg},
+    basicstyle=\ttfamily\small,
+    commentstyle=\color{bashcomment}\itshape,
+    keywordstyle=\color{bashkeyword}\bfseries,
+    breaklines=true,
+    showstringspaces=false,
+    frame=single,
+    rulecolor=\color{bashrule},
+    framesep=4pt,
+    xleftmargin=8pt,
+    xrightmargin=8pt,
+    columns=fullflexible,
+    keepspaces=true,
+    aboveskip=1em,
+    belowskip=1em,
+    % Add your commands here as you introduce them in the book:
+    morekeywords={pwd, ls, ll, cd, mkdir, touch, mv, cp, rm, rmdir,
+                  echo, cat, less, head, tail, grep, find, chmod, chown},
+    literate={\$\ }{{\textcolor{bashprompt}{\$}\ }}2,
+}
+\lstset{style=bash}
+
+% --- Reflection callout box ------------------------------------------
+% Use as:  \begin{reflection} ... \end{reflection}
+\newtcolorbox{reflection}{
+    colback=blue!5!white,
+    colframe=blue!50!black,
+    title=Reflection,
+    fonttitle=\bfseries,
+    boxrule=0.5pt,
+    arc=2pt,
+}
+
+% --- Convenience commands --------------------------------------------
+% \code{...} for inline code. Note: for code containing $, _, ~, \, #, %, &
+% you must escape (e.g., \code{\$}) or use \verb|...| instead.
+\newcommand{\code}[1]{\texttt{#1}}
+
+% --- Spacing tweaks --------------------------------------------------
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}

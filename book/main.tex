@@ -1,0 +1,52 @@
+% =====================================================================
+% Command Line for Biologists
+%   A Practical Guide to the Terminal, Tools, and Reproducible Workflows
+% Author: Andrew Budge
+%
+% Compile with: pdflatex main.tex (run twice for TOC)
+% Or with latexmk: latexmk -pdf main.tex
+% =====================================================================
+
+\documentclass[11pt, openany]{book}
+
+% All packages, styles, and custom commands live in preamble.tex
+\input{preamble}
+
+\title{Command Line for Biologists \\[0.6em]
+       {\large\itshape A Practical Guide to the Terminal, Tools, \\
+        and Reproducible Workflows}}
+\author{Andrew Budge}
+%\date{\today}
+
+% Uncomment to compile only specific chapters (faster while drafting):
+% \includeonly{chapters/02_terminal}
+
+\begin{document}
+
+% --- Front matter: roman numerals, unnumbered chapters ---
+\frontmatter
+\maketitle
+
+% Work-in-progress banner
+\begin{tcolorbox}[colback=red!5!white, colframe=red!60!black,
+                  title=\textbf{Notice}, fonttitle=\bfseries]
+This is a work in progress!
+\end{tcolorbox}
+
+\tableofcontents
+
+\include{chapters/00_foreword}
+
+% --- Main matter: arabic numerals, numbered chapters ---
+\mainmatter
+
+\include{chapters/01_introduction}
+\include{chapters/02_terminal}
+\include{chapters/03_tools}
+
+% --- Back matter (bibliography, index) will go here later ---
+% \backmatter
+% \bibliographystyle{plain}
+% \bibliography{references}
+
+\end{document}
